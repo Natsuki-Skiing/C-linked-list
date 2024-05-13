@@ -207,16 +207,40 @@ int listLen(list * list){
     }
     return(count);
 }
+
+void listSort(list *list){
+    if(!list->sorted){
+        node* currentNode = list->head;
+        node * next;
+        node * cn2 = currentNode;
+        int data;
+        while(currentNode !=NULL){
+            while(cn2!=NULL){
+                if(currentNode->data< cn2->data){
+                    data = currentNode->data;
+                    currentNode->data = cn2->data;
+                    cn2->data = data;
+
+
+                }
+                cn2 = cn2->next;
+
+            }
+            currentNode = currentNode->next;
+            cn2=list->head;
+        }
+    
+    }
+}
 int main(){
     list *testList = newList("Test List");
     
 
+    addNode(testList,3);
+    addNode(testList,4);
     addNode(testList,1);
-    addNode(testList,2);
-    addNode(testList,5);
-
-    insertNodePos(testList,3,2);
-    insertNodePos(testList,6,100);
+    printList(testList);
+    listSort(testList);
 
     printList(testList);
     printf("Sorted %d\n",testList->sorted);
