@@ -208,6 +208,55 @@ int listLen(list * list){
     return(count);
 }
 
+int listDataSrch(list* list , int data){
+    int index = 0;
+    bool found = false;
+    if(list->head == NULL){
+        index = -1;
+    }else{
+        if(list->sorted){
+            if(list->head->data > data || data > list->end->data){
+                index = -1;
+            }else{
+                node * currentNode = list-> head;
+                while(currentNode != NULL){
+                    if(currentNode->data == data){
+                        found = true;
+                        break;
+                    }else if(currentNode-> data > data){
+                        index = -1;
+                        break;
+                    }
+                    else{
+                        index++;
+                        currentNode = currentNode->next;
+                    }
+                }
+            }
+
+        }else{
+            node * currentNode = list-> head;
+                while(currentNode->next != NULL){
+                    if(currentNode->data == data){
+                        found = true;
+                        break;
+                    }
+                    else{
+                        index++;
+                        currentNode = currentNode->next;
+                    }
+                }
+        }
+        if(!found){
+            index = -1;
+        }
+        return(index);
+
+
+    }
+} 
+
+
 void listSort(list *list){
     if(!list->sorted){
         node* currentNode = list->head;
@@ -245,6 +294,7 @@ int main(){
 
     printList(testList);
     printf("Sorted %d\n",testList->sorted);
+    printf("Index %d \n",listDataSrch(testList,4));
 
     return(0);
 }
