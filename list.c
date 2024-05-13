@@ -1,29 +1,66 @@
 #include <stdio.h>
 #include <string.h>
 #include<stdlib.h>
+#include<stdbool.h>
 
 typedef struct _node{
-    char data [15];
+    int data;
     struct _node* next;
     struct _node* prv;
 }node;
 typedef struct list{
-    char listName[10];
+    bool sorted;
+    
     node * head;
     node * end;
 }list;
 
 
-void addNode(list * list,char * data){
+void addNode(list * list,int data){
     node * n = malloc(sizeof(node));
-    strcpy(n->data,data);
+     //strcpy(n->data,data);
+    n->data = data;
     n->next =NULL;
    
     
     if(list->head == NULL){
         list->head = n;
         list-> end = n;
+        list-> sorted = true;
     }else{
+        list->end->next = n;
+        n->prv = list->end;
+        list->end = n ;
+        list->sorted = false;
+
+    }
+
+}
+
+void insertNodeSort(list * list,int data){
+    node * n = malloc(sizeof(node));
+    //strcpy(n->data,data);
+    n->data = data;
+    n->next =NULL;
+   
+    
+    if(list->head == NULL){
+        list->head = n;
+        list-> end = n;
+    }else if(list->sorted){
+        // I wanna check to see if the node is either bigger or smaller than the head and tail, if so this allows for T(O(n)) for insertion
+        if(data < list->head->data){
+            node * temp = list->head;
+            temp->prv = n;
+            n->next = temp;
+            list->head = temp;
+        }else if (data > list->end->data)
+        {
+            node * temp = list->end;
+            temp->next = n;
+            
+        }
+        
         list->end->next = n;
         n->prv = list->end;
         list->end = n ;
@@ -34,15 +71,15 @@ void addNode(list * list,char * data){
 
 void printList(list * list){
     node * head = list->head;
-    char name[10];
-    strcpy(name,list->listName);
-    printf("%s: ",name);
+
+    
+
     if(list ->head == NULL){
         printf("List is empty\n");
     }else{
         node *current = head;
         while(current !=NULL){
-            printf("%s,",current->data);
+            printf("%d,",current->data);
             current = current ->next;
         }
         printf("\n");
@@ -81,7 +118,8 @@ list *newList(char* name){
    list * pList = malloc(sizeof(list));
    pList->head= NULL;
    pList ->end = NULL;
-   strcpy(pList ->listName,name); 
+   pList -> sorted = false;
+
    return(pList);
 
 }
@@ -103,9 +141,9 @@ int listLen(list * list){
 int main(){
     list *testList = newList("Test List");
     printf("%d\n",listLen(testList));
-    addNode(testList,"1");
-    addNode(testList,"2");
-    addNode(testList,"3");
+    addNode(testList,1);
+    addNode(testList,2);
+    addNode(testList,3);
     printList(testList);
     removeLstElement(testList);
     printList(testList);
