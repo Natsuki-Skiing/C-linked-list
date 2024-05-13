@@ -28,10 +28,15 @@ void addNode(list * list,int data){
         list-> end = n;
         list-> sorted = true;
     }else{
+        // Checking to see if the list is sorted and if the data to be added is larger than the tail data and keeping the sorted quality if so
+        if(!(list->sorted && list->end->data < data)){
+            list->sorted = false;
+        }
         list->end->next = n;
         n->prv = list->end;
         list->end = n ;
-        list->sorted = false;
+
+        
 
     }
 
@@ -47,23 +52,27 @@ void insertNodeSort(list * list,int data){
     if(list->head == NULL){
         list->head = n;
         list-> end = n;
+        list->sorted = true;
     }else if(list->sorted){
-        // I wanna check to see if the node is either bigger or smaller than the head and tail, if so this allows for T(O(n)) for insertion
+        // I wanna check to see if the node is either bigger or smaller than the head and tail, if so this allows for T(1) for insertion
         if(data < list->head->data){
             node * temp = list->head;
             temp->prv = n;
             n->next = temp;
-            list->head = temp;
+            list->head = n;
+        // Bigger than end 
         }else if (data > list->end->data)
         {
             node * temp = list->end;
             temp->next = n;
             
+        }else{
+            // Searching through the list to find correct position 
         }
         
-        list->end->next = n;
-        n->prv = list->end;
-        list->end = n ;
+        // list->end->next = n;
+        // n->prv = list->end;
+        // list->end = n ;
 
     }
 
@@ -140,13 +149,11 @@ int listLen(list * list){
 }
 int main(){
     list *testList = newList("Test List");
-    printf("%d\n",listLen(testList));
     addNode(testList,1);
-    addNode(testList,2);
-    addNode(testList,3);
+    insertNodeSort(testList,-1);
+    addNode(testList,-3);
     printList(testList);
-    removeLstElement(testList);
-    printList(testList);
-    printf("%d\n",listLen(testList));
+
+
     return(0);
 }
