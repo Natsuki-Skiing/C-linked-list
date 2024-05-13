@@ -61,13 +61,27 @@ void insertNodeSort(list * list,int data){
             n->next = temp;
             list->head = n;
         // Bigger than end 
-        }else if (data > list->end->data)
-        {
+        }else if (data > list->end->data){
             node * temp = list->end;
             temp->next = n;
+            n ->prv = list->end;
+            list->end = n;
             
         }else{
-            // Searching through the list to find correct position 
+            // Searching through the list to find correct position
+            node * currentNode = list -> head;
+            while(currentNode->next != NULL){
+                if(currentNode -> data < data && currentNode -> next->data > data){
+                    // Inserting the data into the correct position 
+                    n->next = currentNode->next;
+                    currentNode ->next ->prv = n;
+                    currentNode-> next = n;
+
+                    break;
+                }else{
+                    currentNode= currentNode->next;
+                }
+            }
         }
         
         // list->end->next = n;
@@ -151,7 +165,8 @@ int main(){
     list *testList = newList("Test List");
     addNode(testList,1);
     insertNodeSort(testList,-1);
-    addNode(testList,-3);
+    insertNodeSort(testList,5);
+    insertNodeSort(testList,3);
     printList(testList);
 
 
