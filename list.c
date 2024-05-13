@@ -42,6 +42,49 @@ void addNode(list * list,int data){
 
 }
 
+
+void insertNodePos(list * list, int data,int desPos){
+    // Inserts data in list at desired position 
+    // if list len < desired position it dumps it on the end 
+    
+    if(desPos > -1){
+        int pos = 0;
+        bool inserted = false;
+        node * newNode = malloc(sizeof(node));
+        newNode->data = data;
+        if(list->head == NULL){
+            addNode(list,data);
+        }else{
+             // Looping through the list till get to the desired position
+            node * currentNode = list ->  head;
+            while(currentNode ->next != NULL ||pos <= desPos){
+
+                if(pos == desPos){
+                    //Inserting the node
+                    inserted = true;
+                    newNode ->next = currentNode;
+                    newNode ->prv = currentNode ->prv;
+
+                    currentNode->prv->next = newNode;
+                    currentNode->prv = newNode;
+                    break;
+
+                }else{
+                    currentNode = currentNode->next;
+                    pos ++;
+                }
+    }
+        // pushing the value to the end of the list as index> list length 
+        if(! inserted){
+            addNode(list,data);
+        }
+    }
+
+        }
+       
+   
+}
+
 void insertNodeSort(list * list,int data){
     node * n = malloc(sizeof(node));
     //strcpy(n->data,data);
@@ -163,12 +206,16 @@ int listLen(list * list){
 }
 int main(){
     list *testList = newList("Test List");
-    addNode(testList,1);
-    insertNodeSort(testList,-1);
-    insertNodeSort(testList,5);
-    insertNodeSort(testList,3);
-    printList(testList);
+    
 
+    addNode(testList,1);
+    addNode(testList,2);
+    addNode(testList,5);
+
+    insertNodePos(testList,3,2);
+
+    printList(testList);
+    printf("Sorted %d\n",testList->sorted);
 
     return(0);
 }
