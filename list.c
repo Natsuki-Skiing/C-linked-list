@@ -229,6 +229,7 @@ void listSort(list *list){
             currentNode = currentNode->next;
             cn2=list->head;
         }
+        list->sorted = true;
     
     }
 }
