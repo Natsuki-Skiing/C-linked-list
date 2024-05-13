@@ -57,7 +57,7 @@ void insertNodePos(list * list, int data,int desPos){
         }else{
              // Looping through the list till get to the desired position
             node * currentNode = list ->  head;
-            while(currentNode ->next != NULL ||pos <= desPos){
+            while(currentNode != NULL ||pos <= desPos){
 
                 if(pos == desPos){
                     //Inserting the node
@@ -70,6 +70,9 @@ void insertNodePos(list * list, int data,int desPos){
                     break;
 
                 }else{
+                    if(currentNode ->next == NULL){
+                        break;
+                    }
                     currentNode = currentNode->next;
                     pos ++;
                 }
@@ -213,6 +216,7 @@ int main(){
     addNode(testList,5);
 
     insertNodePos(testList,3,2);
+    insertNodePos(testList,6,100);
 
     printList(testList);
     printf("Sorted %d\n",testList->sorted);
