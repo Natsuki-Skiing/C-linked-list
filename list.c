@@ -5,6 +5,7 @@
 typedef struct _node{
     char data [15];
     struct _node* next;
+    struct _node* prv;
 }node;
 typedef struct list{
     char listName[10];
@@ -24,6 +25,7 @@ void addNode(list * list,char * data){
         list-> end = n;
     }else{
         list->end->next = n;
+        n->prv = list->end;
         list->end = n ;
 
     }
@@ -39,10 +41,10 @@ void printList(list * list){
         printf("List is empty\n");
     }else{
         node *current = head;
-        do{
-            printf("%s ,",current->data);
+        while(current !=NULL){
+            printf("%s,",current->data);
             current = current ->next;
-        }while(current !=NULL);
+        }
         printf("\n");
     }
     
@@ -68,9 +70,11 @@ int removeFstElement(list * list){
 }
 
 void removeLstElement(list * list ){
-    node * head = list->head;
-    node * end = list->end;
-    node * temp = head;
+    node * temp = list->end->prv;
+    free(list->end);
+    temp->next = NULL;
+    list-> end = temp;
+    
    
 }
 list *newList(char* name){
@@ -99,9 +103,12 @@ int listLen(list * list){
 int main(){
     list *testList = newList("Test List");
     printf("%d\n",listLen(testList));
-    addNode(testList,"Hallo");
-    addNode(testList,"Hallo");
-    addNode(testList,"Hallo");
+    addNode(testList,"1");
+    addNode(testList,"2");
+    addNode(testList,"3");
+    printList(testList);
+    removeLstElement(testList);
+    printList(testList);
     printf("%d\n",listLen(testList));
     return(0);
 }
