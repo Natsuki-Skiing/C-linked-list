@@ -281,7 +281,7 @@ int listSum(list *list){
     return(sum);
 }
 
-int listMean(list * list){
+float listMean(list * list){
     int noEl = 0;
     int sum = 0;
     node * currentNode = list->head;
@@ -290,7 +290,8 @@ int listMean(list * list){
         currentNode = currentNode->next;
         noEl ++;
     }
-    return(sum/noEl);
+  
+    return((float)sum/noEl);
 }
 
 list * listJoin(list * list1 , list* list2){
@@ -344,21 +345,13 @@ void listSort(list *list){
     }
 }
 int main(){
-    list *testList = listNew();
-    list * list2 = listNew();
 
+    
+    list *testList = listNew();
     addNode(testList,1);
     addNode(testList,2);
     addNode(testList,3);
-
-    addNode(list2,4);
-    addNode(list2,5);
-    addNode(list2,6);
-    
-    testList = listJoin(testList,list2);
-    printList(testList);
-    printf("Sorted %d\n",testList->sorted);
-    listDelete(testList);
-
+    addNode(testList,3);
+    printf(" mean %f\n",listMean(testList));
     return(0);
 }
