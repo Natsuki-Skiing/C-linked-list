@@ -307,7 +307,17 @@ list * listJoin(list * list1 , list* list2){
     return(newList);
 
 }
+void listDelete(list *list){
+    node * temp;
+    while(list->head != NULL){
+        temp = list-> head;
+        list->head = list->head->next;
+        free(temp);
+    }
+    free(list);
+    
 
+}
 void listSort(list *list){
     if(!list->sorted){
         node* currentNode = list->head;
@@ -348,6 +358,7 @@ int main(){
     testList = listJoin(testList,list2);
     printList(testList);
     printf("Sorted %d\n",testList->sorted);
+    listDelete(testList);
 
     return(0);
 }
