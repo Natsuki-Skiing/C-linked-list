@@ -281,6 +281,18 @@ int listSum(list *list){
     return(sum);
 }
 
+int listMean(list * list){
+    int noEl = 0;
+    int sum = 0;
+    node * currentNode = list->head;
+    while(currentNode !=NULL){
+        sum = sum + currentNode->data;
+        currentNode = currentNode->next;
+        noEl ++;
+    }
+    return(sum/noEl);
+}
+
 void listSort(list *list){
     if(!list->sorted){
         node* currentNode = list->head;
