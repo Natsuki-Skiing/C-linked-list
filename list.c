@@ -271,6 +271,16 @@ int listCmp(list*list1 , list* list2){
     return(same);
 }
 
+int listSum(list *list){
+    int sum = 0;
+    node * currentNode = list->head;
+    while(currentNode !=NULL){
+        sum = sum + currentNode->data;
+        currentNode = currentNode->next;
+    }
+    return(sum);
+}
+
 void listSort(list *list){
     if(!list->sorted){
         node* currentNode = list->head;
