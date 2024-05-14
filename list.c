@@ -183,7 +183,7 @@ void removeLstElement(list * list ){
     
    
 }
-list *newList(char* name){
+list *listNew(){
    list * pList = malloc(sizeof(list));
    pList->head= NULL;
    pList ->end = NULL;
@@ -293,6 +293,21 @@ int listMean(list * list){
     return(sum/noEl);
 }
 
+list * listJoin(list * list1 , list* list2){
+    // Add list 2 to the end of list 1 and returns a new list
+    list * newList = listNew();
+    newList = list1;
+    newList->end->prv->next = list2->head;
+    newList-> end = list2 -> end;
+
+    if((list1->sorted && list2->sorted)&&(list1->end->data <= list2->head->data)){
+        newList->sorted = true;
+    }
+
+    return(newList);
+
+}
+
 void listSort(list *list){
     if(!list->sorted){
         node* currentNode = list->head;
@@ -319,20 +334,20 @@ void listSort(list *list){
     }
 }
 int main(){
-    list *testList = newList("Test List");
-    
+    list *testList = listNew();
+    list * list2 = listNew();
 
-    addNode(testList,3);
-    addNode(testList,4);
     addNode(testList,1);
-    printList(testList);
-    listSort(testList);
+    addNode(testList,2);
+    addNode(testList,3);
 
+    addNode(list2,4);
+    addNode(list2,5);
+    addNode(list2,6);
+    
+    testList = listJoin(testList,list2);
     printList(testList);
     printf("Sorted %d\n",testList->sorted);
-    addNode(testList,6);
-
-    printf("Index %d \n",listDataSrch(testList,5));
 
     return(0);
 }
