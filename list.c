@@ -216,7 +216,7 @@ int listDataSrch(list* list , int data){
     }else{
         if(list->sorted){
             if(list->head->data > data || data > list->end->data){
-                index = -1;
+                return(-1);
             }else{
                 node * currentNode = list-> head;
                 while(currentNode != NULL){
@@ -224,7 +224,6 @@ int listDataSrch(list* list , int data){
                         found = true;
                         break;
                     }else if(currentNode-> data > data){
-                        index = -1;
                         break;
                     }
                     else{
@@ -256,6 +255,21 @@ int listDataSrch(list* list , int data){
     }
 } 
 
+int listCmp(list*list1 , list* list2){
+    bool same = true;
+    node* lst1Node = list1->head;
+    node* lst2Node = list2->head;
+    while(lst1Node !=NULL && lst2Node!= NULL){
+        if(lst1Node->data != lst2Node->data){
+            same = false;
+            break;
+        }else{
+            lst1Node= lst1Node->next;
+            lst2Node= lst2Node->next;
+        }
+    }
+    return(same);
+}
 
 void listSort(list *list){
     if(!list->sorted){
@@ -294,7 +308,9 @@ int main(){
 
     printList(testList);
     printf("Sorted %d\n",testList->sorted);
-    printf("Index %d \n",listDataSrch(testList,4));
+    addNode(testList,6);
+
+    printf("Index %d \n",listDataSrch(testList,5));
 
     return(0);
 }
