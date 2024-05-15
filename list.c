@@ -161,6 +161,41 @@ void printList(list * list){
     
 }
 
+void listDelElData(list* list, int data, bool all){
+    // flag all is used to determine if we are to delete all the instantace of the data or just the first 
+    node * currentNode = list->head;
+    bool del;
+    if(!(list->sorted && (data < list->head->data || data > list->end->data))){
+
+        while(currentNode != NULL){
+            del = false;
+         
+            if(currentNode->data > data && list->sorted){
+                break;
+            }else{
+                if(currentNode->data == data){ 
+                    currentNode->prv->next = currentNode->next;
+                    currentNode ->next ->prv = currentNode->prv;
+                    
+                    free(currentNode);
+                    del = true;
+                    if(!all){
+                        break;
+                    }
+                        
+                
+                }
+            }
+            if(del){
+                currentNode = list->head;
+            }else{
+                currentNode = currentNode->next;
+            }
+            
+        }
+    }
+}
+
 int removeFstElement(list * list){
     if(list->head != NULL){
 
@@ -360,5 +395,6 @@ int main(){
     printf(" mean %f\n",listMean(testList));
     int megaAids = listDataSrch(testList,3);
     listGrow(testList);
+    listDelElData(testList,3,true);
     return(0);
 }
