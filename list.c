@@ -16,7 +16,7 @@ typedef struct list{
 }list;
 
 
-void addNode(list * list,int data){
+void listAddNode(list * list,int data){
     node * n = malloc(sizeof(node));
      //strcpy(n->data,data);
     n->data = data;
@@ -53,7 +53,7 @@ void insertNodePos(list * list, int data,int desPos){
         node * newNode = malloc(sizeof(node));
         newNode->data = data;
         if(list->head == NULL){
-            addNode(list,data);
+            listAddNode(list,data);
         }else{
              // Looping through the list till get to the desired position
             node * currentNode = list ->  head;
@@ -79,7 +79,7 @@ void insertNodePos(list * list, int data,int desPos){
     }
         // pushing the value to the end of the list as index> list length 
         if(! inserted){
-            addNode(list,data);
+            listAddNode(list,data);
         }
     }
 
@@ -136,6 +136,11 @@ void insertNodeSort(list * list,int data){
 
     }
 
+}
+
+void listGrow(list* list){
+    // Adds the last two elements of the list together then stores the sum in a new element at the end of the list 
+    listAddNode(list, (list->end->data + list->end->prv->data));
 }
 
 void printList(list * list){
@@ -348,10 +353,12 @@ int main(){
 
     
     list *testList = listNew();
-    addNode(testList,1);
-    addNode(testList,2);
-    addNode(testList,3);
-    addNode(testList,3);
+    listAddNode(testList,1);
+    listAddNode(testList,2);
+    listAddNode(testList,3);
+    listAddNode(testList,3);
     printf(" mean %f\n",listMean(testList));
+    int megaAids = listDataSrch(testList,3);
+    listGrow(testList);
     return(0);
 }
