@@ -65,3 +65,23 @@ int listLen(list*);
 the search term*/
 int listDataSrsh(list*,int);
 
+/*Comapares two lists as a whole
+returns 1 if all elements are the same
+0 if not*/
+int listCmp(list*,list*);
+
+/*sum of all list elements*/
+int listSum(list*);
+
+/*Mean adverage of all list elements*/
+float listMean(list*);
+
+/* adds second list to end of first list and retuns a pointer to the new list*/
+list* listJoin(list*,list*);
+
+/*deletes a list
+frees all memory used*/
+void listDelete(list *);
+
+/* Sorts list elements in acending order*/
+void listSort(list*);
