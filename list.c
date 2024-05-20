@@ -437,18 +437,3 @@ int listMostFrequent(list *listin){
 
 
 
-int main(){
-    list* test = listNew();
-    listAddNode(test,3);
-    listAddNode(test,1);
-    listAddNode(test,1);
-    listAddNode(test,1);
-    listAddNode(test,2);
-    listAddNode(test,1);
-
-    listPrint(test);
-
-    node * testNode = listNodeIndex(test,5);
-    printf("%d",listMostFrequent(test));
-    return(0);
-}
