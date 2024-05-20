@@ -143,7 +143,7 @@ void listGrow(list* list){
     listAddNode(list, (list->end->data + list->end->prv->data));
 }
 
-void printList(list * list){
+void listPrint(list * list){
     node * head = list->head;
 
     
@@ -161,7 +161,7 @@ void printList(list * list){
     
 }
 
-void listDelElData(list* list, int data, bool all){
+void listDelData(list* list, int data, bool all){
     // flag all is used to determine if we are to delete all the instantace of the data or just the first 
     node * currentNode = list->head;
     bool del;
@@ -196,7 +196,7 @@ void listDelElData(list* list, int data, bool all){
     }
 }
 
-int removeFstElement(list * list){
+int listRemoveFst(list * list){
     if(list->head != NULL){
 
     
@@ -215,7 +215,7 @@ int removeFstElement(list * list){
 
 }
 
-void removeLstElement(list * list ){
+void listRemoveLst(list * list ){
     node * temp = list->end->prv;
     free(list->end);
     temp->next = NULL;
@@ -383,18 +383,4 @@ void listSort(list *list){
         list->sorted = true;
     
     }
-}
-int main(){
-
-    
-    list *testList = listNew();
-    listAddNode(testList,1);
-    listAddNode(testList,2);
-    listAddNode(testList,3);
-    listAddNode(testList,3);
-    printf(" mean %f\n",listMean(testList));
-    int megaAids = listDataSrch(testList,3);
-    listGrow(testList);
-    listDelElData(testList,3,true);
-    return(0);
 }
