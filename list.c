@@ -4,6 +4,7 @@
 #include<stdbool.h>
 
 typedef struct _node{
+
     int data;
     struct _node* next;
     struct _node* prv;
@@ -383,4 +384,49 @@ void listSort(list *list){
         list->sorted = true;
     
     }
+}
+
+int listMostFrequent(list *listin){
+    //returns the most frequent data value
+    list* tracked = listNew();
+    list* values = listNew();
+    node * currentNode = listin->head;
+    int inTracked;
+    while(currentNode !=NULL){
+        inTracked = listDataSrch(tracked ,currentNode->data);
+        if(inTracked == -1){
+            listAddNode(tracked,currentNode->data);
+            listAddNode(values,1);
+
+        }else{
+            listNodeIndex(values,inTracked)->data ++;
+        }
+    }
+    currentNode = values->head;
+    int most = -1;
+    int mostIndex =-1;
+    while(currentNode != NULL){
+        if(currentNode->data > most){
+            mostIndex ++;
+            most = currentNode->data;
+        }
+        currentNode = currentNode->next;
+    }
+    return(listNodeIndex(tracked,mostIndex)->data)
+
+}
+
+node* listNodeIndex(list* list, int index){
+    int counter = 0;
+    node * currentNode = list ->head;
+    while(currentNode !=NULL){
+        if(index != counter){
+            counter ++;
+            currentNode = currentNode ->next;
+        }else{
+            return(currentNode);
+        }
+        
+    }
+    return(currentNode);
 }

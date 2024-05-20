@@ -85,3 +85,9 @@ void listDelete(list *);
 
 /* Sorts list elements in acending order*/
 void listSort(list*);
+
+/*Returns the element thats at the given index*/
+node* listNodeIndex(list*,int);
+
+/*calculates the most frequent data item in a list*/
+int listMostFrequent(list*);
