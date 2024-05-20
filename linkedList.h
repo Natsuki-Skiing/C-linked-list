@@ -61,4 +61,7 @@ list* listNew();
 Number of elements*/
 int listLen(list*);
 
+/*returns the position of the first element that's data matches
+the search term*/
+int listDataSrsh(list*,int);
 
