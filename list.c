@@ -290,10 +290,11 @@ int listDataSrch(list* list , int data){
         if(!found){
             index = -1;
         }
-        return(index);
+        
 
 
     }
+    return(index);
 } 
 
 int listCmp(list*list1 , list* list2){
@@ -386,6 +387,21 @@ void listSort(list *list){
     }
 }
 
+node* listNodeIndex(list* list, int index){
+    int counter = 0;
+    node * currentNode = list ->head;
+    while(currentNode !=NULL){
+        if(index != counter){
+            counter ++;
+            currentNode = currentNode ->next;
+        }else{
+            return(currentNode);
+        }
+        
+    }
+    return(currentNode);
+}
+
 int listMostFrequent(list *listin){
     //returns the most frequent data value
     list* tracked = listNew();
@@ -401,6 +417,7 @@ int listMostFrequent(list *listin){
         }else{
             listNodeIndex(values,inTracked)->data ++;
         }
+        currentNode = currentNode ->next;
     }
     currentNode = values->head;
     int most = -1;
@@ -412,21 +429,26 @@ int listMostFrequent(list *listin){
         }
         currentNode = currentNode->next;
     }
-    return(listNodeIndex(tracked,mostIndex)->data)
+    currentNode = listNodeIndex(tracked,mostIndex);
+   
+    return(currentNode->data);
 
 }
 
-node* listNodeIndex(list* list, int index){
-    int counter = 0;
-    node * currentNode = list ->head;
-    while(currentNode !=NULL){
-        if(index != counter){
-            counter ++;
-            currentNode = currentNode ->next;
-        }else{
-            return(currentNode);
-        }
-        
-    }
-    return(currentNode);
+
+
+int main(){
+    list* test = listNew();
+    listAddNode(test,3);
+    listAddNode(test,1);
+    listAddNode(test,1);
+    listAddNode(test,1);
+    listAddNode(test,2);
+    listAddNode(test,1);
+
+    listPrint(test);
+
+    node * testNode = listNodeIndex(test,5);
+    printf("%d",listMostFrequent(test));
+    return(0);
 }
