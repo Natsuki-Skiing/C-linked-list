@@ -448,12 +448,3 @@ int listMostFrequent(list *listin){
 
 
 
-int main(){
-    list* temp = listNew();
-    listAdd(temp,1);
-    listPrint(temp);
-    listAddSrt(temp,4);
-    listPrint(temp);
-
-    return(0);
-}
