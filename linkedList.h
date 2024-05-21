@@ -3,7 +3,14 @@
 // This is a node of a list 
 // As a pointer to next and previous node 
 // Holds a integer value 
-typedef struct node;
+
+typedef struct _node{
+
+    int data;
+    struct _node* next;
+    struct _node* prv;
+}node;
+
 
 /*
 List 
@@ -11,7 +18,12 @@ Has a sorted proporty, a boolean value
 Has a node pointer to the hade and tail of the list 
 If a list IS sorted some operations are performed quicker 
 */
-typedef struct list;
+typedef struct list{
+    int sorted;
+    
+    node * head;
+    node * end;
+}list;
 
 // Sorts provided list
 void listSort(list *);
