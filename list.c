@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 #include<stdlib.h>
-#include<stdbool.h>
+
 #include"linkedList.h"
-typedef struct _node{
+// typedef struct _node{
 
-    int data;
-    struct _node* next;
-    struct _node* prv;
-}node;
-typedef struct list{
-    bool sorted;
+//     int data;
+//     struct _node* next;
+//     struct _node* prv;
+// }node;
+// typedef struct list{
+//     bool sorted;
     
-    node * head;
-    node * end;
-}list;
+//     node * head;
+//     node * end;
+// }list;
 
-
-void listAddNode(list * list,int data){
+void listAdd(list*list,int data){
+    listAddEnd(list,data);
+}
+void listAddEnd(list * list,int data){
     node * n = malloc(sizeof(node));
      //strcpy(n->data,data);
     n->data = data;
@@ -54,7 +56,7 @@ void insertNodePos(list * list, int data,int desPos){
         node * newNode = malloc(sizeof(node));
         newNode->data = data;
         if(list->head == NULL){
-            listAddNode(list,data);
+            listAddEnd(list,data);
         }else{
              // Looping through the list till get to the desired position
             node * currentNode = list ->  head;
@@ -80,7 +82,7 @@ void insertNodePos(list * list, int data,int desPos){
     }
         // pushing the value to the end of the list as index> list length 
         if(! inserted){
-            listAddNode(list,data);
+            listAddEnd(list,data);
         }
     }
 
@@ -141,7 +143,7 @@ void insertNodeSort(list * list,int data){
 
 void listGrow(list* list){
     // Adds the last two elements of the list together then stores the sum in a new element at the end of the list 
-    listAddNode(list, (list->end->data + list->end->prv->data));
+    listAddEnd(list, (list->end->data + list->end->prv->data));
 }
 
 void listPrint(list * list){
@@ -163,7 +165,7 @@ void listPrint(list * list){
 }
 
 void listDelData(list* list, int data, bool all){
-    // flag all is used to determine if we are to delete all the instantace of the data or just the first 
+    // flag all is used to determine if we are to delete all the instanace of the data or just the first 
     node * currentNode = list->head;
     bool del;
     if(!(list->sorted && (data < list->head->data || data > list->end->data))){
@@ -411,8 +413,8 @@ int listMostFrequent(list *listin){
     while(currentNode !=NULL){
         inTracked = listDataSrch(tracked ,currentNode->data);
         if(inTracked == -1){
-            listAddNode(tracked,currentNode->data);
-            listAddNode(values,1);
+            listAddEnd(tracked,currentNode->data);
+            listAddEnd(values,1);
 
         }else{
             listNodeIndex(values,inTracked)->data ++;

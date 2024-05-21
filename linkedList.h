@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 // Adds doubly linked list functionality 
 
 // This is a node of a list 
@@ -6,7 +8,7 @@
 
 typedef struct _node{
 
-    int data;
+    bool data;
     struct _node* next;
     struct _node* prv;
 }node;
@@ -14,7 +16,7 @@ typedef struct _node{
 
 /*
 List 
-Has a sorted proporty, a boolean value
+Has a sorted property, a boolean value
 Has a node pointer to the hade and tail of the list 
 If a list IS sorted some operations are performed quicker 
 */
@@ -34,7 +36,7 @@ If the list Is not sorted then nothing happens*/
 void insertNodeSort(list*,int);
 
 /*
-Adds the last two elemnts in a list and adds the sum as a new element at the end of the list 
+Adds the last two elemets in a list and adds the sum as a new element at the end of the list 
 */
 void listGrow(list* );
 
@@ -62,14 +64,14 @@ Remove the tail/ end of the passed list
 void listRemoveLst(list*);
 
 /*sets up a new list
-this must be used to proporly set up and use a list 
+this must be used to properly set up and use a list 
 lists WILL NOT WORK if not called 
 example:
     list exampleList = listNew();
 */
 list* listNew();
 
-/*Returns the lenght of a list 
+/*Returns the length of a list 
 Number of elements*/
 int listLen(list*);
 
@@ -77,7 +79,7 @@ int listLen(list*);
 the search term*/
 int listDataSrsh(list*,int);
 
-/*Comapares two lists as a whole
+/*Compares two lists as a whole
 returns 1 if all elements are the same
 0 if not*/
 int listCmp(list*,list*);
@@ -85,7 +87,7 @@ int listCmp(list*,list*);
 /*sum of all list elements*/
 int listSum(list*);
 
-/*Mean adverage of all list elements*/
+/*Mean average of all list elements*/
 float listMean(list*);
 
 /* adds second list to end of first list and retuns a pointer to the new list*/
@@ -95,7 +97,7 @@ list* listJoin(list*,list*);
 frees all memory used*/
 void listDelete(list *);
 
-/* Sorts list elements in acending order*/
+/* Sorts list elements in ascending order*/
 void listSort(list*);
 
 /*Returns the element thats at the given index*/
@@ -103,3 +105,8 @@ node* listNodeIndex(list*,int);
 
 /*calculates the most frequent data item in a list*/
 int listMostFrequent(list*);
+
+/*Both add data to end of a list 
+listAdd just calls listAddEnd */
+void listAdd(list*,int);
+void listAddEnd(list*,int);
