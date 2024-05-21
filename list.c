@@ -45,7 +45,16 @@ void listAddEnd(list * list,int data){
 
 }
 
-
+void listAddSrt(list * list,int data){
+    if(data> list->head->data&& list->sorted){
+        list->sorted = false;
+    }
+    node * new = malloc(sizeof(node));
+    new->data = data;
+    new->next = list->head;
+    list->head->prv = new;
+    list->head = new;
+    }
 void insertNodePos(list * list, int data,int desPos){
     // Inserts data in list at desired position 
     // if list len < desired position it dumps it on the end 
@@ -439,3 +448,12 @@ int listMostFrequent(list *listin){
 
 
 
+int main(){
+    list* temp = listNew();
+    listAdd(temp,1);
+    listPrint(temp);
+    listAddSrt(temp,4);
+    listPrint(temp);
+
+    return(0);
+}

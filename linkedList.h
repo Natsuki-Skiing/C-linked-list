@@ -8,7 +8,7 @@
 
 typedef struct _node{
 
-    bool data;
+    int data;
     struct _node* next;
     struct _node* prv;
 }node;
@@ -21,7 +21,7 @@ Has a node pointer to the hade and tail of the list
 If a list IS sorted some operations are performed quicker 
 */
 typedef struct list{
-    int sorted;
+    bool sorted;
     
     node * head;
     node * end;
@@ -110,3 +110,6 @@ int listMostFrequent(list*);
 listAdd just calls listAddEnd */
 void listAdd(list*,int);
 void listAddEnd(list*,int);
+
+/*Add to the start of a list*/
+void listAddSrt(list*, int);
